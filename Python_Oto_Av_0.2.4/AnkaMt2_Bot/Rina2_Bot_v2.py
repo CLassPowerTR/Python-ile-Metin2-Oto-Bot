@@ -3,14 +3,8 @@ import botWindow
 import win32gui
 import tkinter as tk
 
-#    Proxy          PORT
-# 95.9.115.228	    3128    Https   anonymous
-# 176.33.14.34	    3127
-# 89.252.152.208	2019
-# 176.236.141.30	10001
-
-customtkinter.set_appearance_mode("dark")  # Modes: "System" (standard), "Dark", "Light"
-customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
+customtkinter.set_appearance_mode("dark") 
+customtkinter.set_default_color_theme("blue") 
 class MainWindow(customtkinter.CTk):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
