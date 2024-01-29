@@ -64,81 +64,6 @@ def metinAvla(metin,lastCoor):
     time.sleep(0.2)
     return lastCoor
     
-def saatHesapla():
-    if o.get() ==1:        
-        turkey_timezone = timezone(timedelta(hours=3))
-        now_utc = datetime.now(timezone.utc)
-        now_turkey = now_utc.astimezone(turkey_timezone)
-        metininYenilenenSaati, metininYenilenenDakikasi, metininYenilenenSaniyesi = 13, 1, 6
-        kalanZaman = 160
-        kalanZamanDakika = 0
-        kalanZamanSaniye = 0
-        suankiSaniye1 = now_turkey.second
-        suankiSaat, suankiDakika, suankiSaniye = now_turkey.hour, now_turkey.minute, now_turkey.second
-        while True:
-            if suankiSaat<=metininYenilenenSaati and suankiDakika<= metininYenilenenDakikasi and suankiSaniye<=metininYenilenenSaniyesi:
-                metininYenilenenDakikasi += 2
-                metininYenilenenSaniyesi += 40
-                if metininYenilenenSaniyesi>=60:
-                    metininYenilenenSaniyesi -=60
-                    metininYenilenenDakikasi+=1
-                if metininYenilenenDakikasi>=60:
-                    metininYenilenenDakikasi -=60
-                    metininYenilenenSaati +=1
-                if metininYenilenenSaati>= 24:
-                    metininYenilenenSaati -= 24
-            print(f"Şuanki Zaman: {suankiSaat}:{suankiDakika}.{suankiSaniye}")
-            print(f"Metin Yenilenme Zamanı: {metininYenilenenSaati}:{metininYenilenenDakikasi}:{metininYenilenenSaniyesi}")
-            else:
-                break
-        while o.get() ==1:   
-            try:
-                turkey_timezone = timezone(timedelta(hours=3))
-                now_utc = datetime.now(timezone.utc)
-                now_turkey = now_utc.astimezone(turkey_timezone)
-                
-                suankiSaat, suankiDakika, suankiSaniye = now_turkey.hour, now_turkey.minute, now_turkey.second
-                
-                #if metininYenilenenSaati <= suankiSaat or (metininYenilenenSaniyesi <= suankiSaniye and metininYenilenenDakikasi == suankiDakika):
-                if metininYenilenenSaniyesi <= suankiSaniye:
-                    if metininYenilenenDakikasi == suankiDakika:
-                        if metininYenilenenSaati <= suankiSaat:
-                #if metininYenilenenSaati <= suankiSaat or (metininYenilenenSaniyesi <= suankiSaniye and metininYenilenenDakikasi <= suankiDakika):
-                            metininYenilenenDakikasi +=2
-                            metininYenilenenSaniyesi +=40
-                            kalanZaman = 160
-                    
-                if metininYenilenenSaniyesi >= 60:
-                    metininYenilenenDakikasi +=1
-                    metininYenilenenSaniyesi -=60
-                if metininYenilenenDakikasi >= 60:
-                    metininYenilenenDakikasi -=60
-                    metininYenilenenSaati +=1
-                if metininYenilenenSaati >= 24:
-                    metininYenilenenSaati -= 24
-                    
-
-                kalanZamanDakika = kalanZaman // 60
-                kalanZamanSaniye = kalanZaman % 60
-
-                if kalanZaman == 0:
-                    kalanZaman = 160
-                if suankiSaniye1<suankiSaniye:
-                    kalanZaman -=1
-                suankiSaniye1 = suankiSaniye
-                metinZamanlayici.configure(text=f"{suankiSaat:02d}:{suankiDakika:02d}:{suankiSaniye:02d}")
-                cikacakSaat.configure(text=f"{metininYenilenenSaati:02d}:{metininYenilenenDakikasi:02d}:{metininYenilenenSaniyesi:02d}")
-                kalanSüre.configure(text=f"00:{kalanZamanDakika:02d}:{kalanZamanSaniye:02d}")
-                time.sleep(0.1)
-
-            except Exception as e:
-                metinZamanlayici.configure(text=f"{e}")
-                kalanSüre.configure(text="{}".format(e))
-                cikacakSaat.configure(text="{}".format(e))
-                print(f"Hata: {e}")
-                time.sleep(3)
-    
-    
 def metinAvla1(metin,lastCoor,lastCoor1):
     if lastCoor is None:
         closest_coord = find_closest(metin,middle1[0]/2,middle1[1]/2)
@@ -644,8 +569,6 @@ def AllView(self,hwnd,hwnd3):
     otoMetinEntry1 = customtkinter.CTkEntry(self.otoMetin,textvariable=otoMetinEntryValue1,corner_radius=self.entryCornerRadius,text_color="#bababa",width=self.entryWidth,height=self.entryHeight)
     otoMetinEntry1.grid(row=5, column=1, padx=(0,70), pady=(15,0))
     
-    
-    threading.Thread(target=saatHesapla).start()
     
     #### YENİ SCRİPT ####
     if hwnd3 != 0:
