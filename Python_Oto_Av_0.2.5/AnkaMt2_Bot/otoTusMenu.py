@@ -25,29 +25,6 @@ def oneGetir1():
             print(f"Hata {hwnd2}")
             bilgi.configure(text=f"Hata: {hwnd2}",fg_color="red",text_color="black")
 
-def otoKey():
-    if tusGet.get() == 1 or tusGet1.get() == 1:
-        if tusGet.get() == 1:
-            otoTusDurum.configure(text=f"Tuş : {otoTusEntryValue.get()}")
-            keyboard.press(f"{otoTusEntryValue.get()}")
-            time.sleep(0.02)
-            keyboard.release(f"{otoTusEntryValue.get()}")
-        else:
-            otoTusDurum.configure(text=f"Tuş : X")
-        if tusGet1.get() == 1:
-            otoTusDurum1.configure(text=f"Tuş : {otoTusEntryValue1.get()}")
-            keyboard.press(f"{otoTusEntryValue1.get()}")
-            time.sleep(0.02)
-            keyboard.release(f"{otoTusEntryValue1.get()}")
-        else:
-            otoTusDurum1.configure(text=f"Tuş : X")
-    elif (tusGet.get() == 0 and tusGet1.get() == 0) or donerekVur.get() == 0:
-        bilgi.configure(text="Oto Tuş Durdu",fg_color="transparent",text_color="white")
-        start.configure(text="Başlat")
-        otoTusDurumu = 0
-        otoTusDurum.configure(text=f"Tuş : X")
-        otoTusDurum1.configure(text=f"Tuş : X")
-
 def donerekVurma():
     if self1.hesap1.get() == 1:
         oneGetir()
